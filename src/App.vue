@@ -1,23 +1,38 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- loading layer -->
+    <loading></loading>
+    <!-- /loading layer -->
+
+    <!-- router-view -->
+    <!-- <transition> -->
+      <router-view/>
+    <!-- </transition> -->
+    <!-- /router-view -->
+    
   </div>
 </template>
 
 <script>
+import Loading from '@/components/Loading'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Loading
+  }
 }
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
 }
 </style>

@@ -2,11 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <title>lucky-dog</title>
   </head>
   <body>
+    <div class="m-loading" data-role="temp"></div>
     <div id="app"></div>
+    <script>
+      var gameConfig = {
+        // 是否是登记过的，已登记的在开始游戏时将不弹出登记窗口
+        isRegistered: false,
+        // 是否能够开始游戏
+        canPlay: true
+      }
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>
