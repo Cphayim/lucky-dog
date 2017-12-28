@@ -19,7 +19,7 @@
 }
 
 // 遮罩层
-@mixin mask($zIndex: 999, $bc:rgba(0, 0, 0, 0.5)) {
+@mixin mask($zIndex: 999, $bc:rgba(0, 0, 0, 0.55)) {
     position: fixed;
     top: 0;
     left: 0;
