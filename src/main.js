@@ -1,6 +1,7 @@
-import '@/styles/reset.css' // 1
-import '@/styles/animate.css' // 2
-import '@/styles/common.scss' // 2
+import '@/styles/lib/reset.css' // 1
+import '@/styles/lib/animate.css' // 2
+import '@/styles/lib/csshake.min.css' // 3
+import '@/styles/common.scss' // 4
 
 import Response from '@/scripts/response'
 import Vue from 'vue'
