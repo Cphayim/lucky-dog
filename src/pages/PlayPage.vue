@@ -13,7 +13,6 @@
     <!-- 结果组件 -->
     <result 
       v-if="isShowResult"
-      @againGame="again"
       @openShare="isShowShareLayer = true">
     </result>
     <!-- /结果组件 -->
@@ -37,6 +36,14 @@ export default {
   components: { Dog, Result, Share },
   data() {
     return {
+      /**
+       * 是否通过验证
+       * 将在 created 钩子中对比 路由传递的 hash 和 store 中的 hash 是否一致，
+       * 若不一致将跳转到首页
+       * @property {boolean} valid
+       */
+      valid: false,
+
       /**
        * 是否载入完毕
        * @property {boolean} isLoaded
@@ -63,9 +70,15 @@ export default {
     }
   },
   created() {
-
+    if (this.$route.params.hash === this.$store.state.hash) {
+      this.valid = true
+    } else {
+      this.$store.commit('openLoading')
+      setTimeout(() => this.$router.replace({ name: 'home' }), 500)
+    }
   },
   mounted() {
+    if (!this.valid) return
     setTimeout(() => this.$store.commit('closeLoading'), 1000)
     setTimeout(() => {
       this.isLoaded = true

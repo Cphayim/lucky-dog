@@ -46,7 +46,7 @@
  * @Author: Cphayim 
  * @Date: 2017-12-27 11:25:10 
  * @Last Modified by: Cphayim
- * @Last Modified time: 2017-12-28 17:49:56
+ * @Last Modified time: 2017-12-30 23:43:14
  */
 
 import Tip from '@/components/Tip'
@@ -146,10 +146,14 @@ export default {
      * @method startGame
      */
     startGame() {
-      // TODO 开始游戏
       setTimeout(() => {
         this.$store.commit('openLoading')
-        this.$router.replace('play')
+        setTimeout(() => this.$router.replace({
+          name: 'play',
+          params: {
+            hash: this.$store.state.hash
+          }
+        }), 500)
       }, this.isShowRegister ? 1500 : 0)
 
       this.isShowRegister = false
