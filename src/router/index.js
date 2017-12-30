@@ -16,6 +16,10 @@ export default new Router({
       path: '/play',
       name: 'play',
       component: PlayPage
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
