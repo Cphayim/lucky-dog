@@ -94,12 +94,14 @@ export default {
       new Promise((resolve, reject) => {
         setTimeout(() => {
           this.isShake = true
+          this.$store.commit('playAudio', 'shake')
           resolve()
         }, 600)
       }).then(() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             this.isShake = false
+            this.$store.commit('stopAudio', 'shake')
             this.isShowResult = true
             resolve()
           }, 3000)

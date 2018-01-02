@@ -2,7 +2,7 @@
  * @Author: Cphayim 
  * @Date: 2017-12-27 10:39:19 
  * @Last Modified by: Cphayim
- * @Last Modified time: 2018-01-02 11:23:53
+ * @Last Modified time: 2018-01-02 22:47:23
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -58,7 +58,30 @@ export default new Vuex.Store({
      * 分享图片
      * @property {string} minigameImg
      */
-    minigameImg: gameConfig.minigameImg
+    minigameImg: gameConfig.minigameImg,
+
+    /**
+     * 背景音乐
+     * @property {DOMElement}
+     */
+    bgmAudio: (() => {
+      const audio = new Audio('http://p1xb162jl.bkt.clouddn.com/game/lucky-dog/bgm.mp3')
+      audio.loop = true
+      audio.addEventListener('canplaythrough', function (e) { this.play() })
+      audio.addEventListener('error', err => console.log(err))
+      return audio
+    })(),
+    shakeAudio: (() => {
+      const audio = new Audio('http://p1xb162jl.bkt.clouddn.com/game/lucky-dog/shake.mp3')
+      audio.loop = true
+      audio.addEventListener('error', e => console.log(e))
+      return audio
+    })(),
+    victoryAudio: (() => {
+      const audio = new Audio('http://p1xb162jl.bkt.clouddn.com/game/lucky-dog/victory.mp3')
+      audio.addEventListener('error', e => console.log(e))
+      return audio
+    })()
   },
   mutations: {
     /**
@@ -83,6 +106,29 @@ export default new Vuex.Store({
      */
     registered(state) {
       state.isRegistered = true
+    },
+
+    /**
+     * 播放背景音乐
+     * @param {string} name
+     */
+    playAudio(state, name) {
+      const audio = state[`${name}Audio`]
+      if (audio) {
+        audio.play()
+      }
+    },
+
+    /**
+     * 停止背景音乐
+     * @param {string} name
+     */
+    stopAudio(state, name) {
+      const audio = state[`${name}Audio`]
+      if (audio) {
+        audio.pause()
+        audio.currentTime = 0
+      }
     }
   },
   actions: {},

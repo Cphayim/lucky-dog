@@ -67,10 +67,10 @@ export default {
 .lot-leave-active {
   transition: opacity 0.6s;
   .light {
-    animation: light-blank 2s both 0.6s;
+    animation: light-blank 1.2s both 0.6s;
   }
   .lot {
-    animation: lot-rotate 1s both 2.4s;
+    animation: lot-rotate 1s both 1.6s;
   }
 }
 .lot-enter,

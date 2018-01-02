@@ -74,6 +74,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.isShowLot = true
+      this.$store.commit('playAudio', 'victory')
     }, 500)
     this.editWXShare()
   },
@@ -106,7 +107,6 @@ export default {
     editWXShare() {
       // 如果存在配置则修改
       if (typeof window.shareData === 'object' && typeof window.initShare === 'function') {
-        console.log('开始修改配置')
         const lotStrArr = ['无', '有钱多金', '身体健康', '极速脱单', '桃花朵朵', '心宽体胖', '戏精附身', '光吃不胖', '少玩手机']
         const shareData = window.shareData
         shareData.title = `2018，我会#${lotStrArr[this.activeLotIndex]}#`
