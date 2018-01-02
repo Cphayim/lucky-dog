@@ -18,7 +18,7 @@
  * @Author: Cphayim 
  * @Date: 2017-12-27 11:23:05 
  * @Last Modified by: Cphayim
- * @Last Modified time: 2017-12-28 15:40:41
+ * @Last Modified time: 2018-01-02 11:08:02
  */
 
 export default {
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     feel() {
-      if(++this.count === 10){
+      if(++this.count === 30){
         this.$emit('easter-egg')
       }
     }
@@ -64,6 +64,7 @@ export default {
   position: absolute;
   top: r(130);
   z-index: 5;
+  display: flex;
   width: 100%;
   opacity: 0;
   will-change: auto;
