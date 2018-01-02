@@ -75,7 +75,7 @@ export default {
     setTimeout(() => {
       this.isShowLot = true
     }, 500)
-
+    this.editWXShare()
   },
   methods: {
     /**
@@ -97,6 +97,23 @@ export default {
         this.$store.commit('openLoading')
         setTimeout(() => this.$router.replace({ name: 'home' }), 500)
       }, 1000)
+    },
+
+    /**
+     * 修改微信分享配置
+     * @method editWXShare
+     */
+    editWXShare() {
+      // 如果存在配置则修改
+      if (typeof window.shareData === 'object' && typeof window.initShare === 'function') {
+        console.log('开始修改配置')
+        const lotStrArr = ['无', '有钱多金', '身体健康', '极速脱单', '桃花朵朵', '心宽体胖', '戏精附身', '光吃不胖', '少玩手机']
+        const shareData = window.shareData
+        shareData.title = `2018，我会#${lotStrArr[this.activeLotIndex]}#`
+        shareData.content = this.$store.state.minigameTitle
+        shareData.imgUrl = this.$store.state.minigameImg
+        window.initShare(shareData.title, shareData.content, shareData.imgUrl, shareData.detailUrl, shareData.appId, shareData.report)
+      }
     }
   }
 }

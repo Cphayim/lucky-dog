@@ -7,11 +7,11 @@
       <div class="register-form">
         <div class="row">
           <span>姓名：</span>
-          <input type="text" v-model="info.Name">
+          <input type="text" v-model="info.name">
         </div>
         <div class="row">
           <span>电话：</span>
-          <input type="number" v-model="info.MobilePhone">
+          <input type="number" v-model="info.mobilePhone">
         </div>
       </div>
       <div @click="submit" class="register-btn"></div>
@@ -24,7 +24,7 @@
  * @Author: Cphayim 
  * @Date: 2017-12-27 11:23:05 
  * @Last Modified by: Cphayim
- * @Last Modified time: 2017-12-28 17:29:20
+ * @Last Modified time: 2018-01-02 10:25:45
  */
 import Dialog from '@/components/Dialog'
 
@@ -40,32 +40,52 @@ export default {
   data() {
     return {
       info: {
-        MobilePhone: '',
-        Name: '',
-        MinigameId: ''
+        mobilePhone: '',
+        name: ''
       }
     }
   },
   methods: {
+    /**
+     * 提交信息
+     * @method submit
+     */
     submit() {
+      if(this.isLoading) return 
       const emptyReg = /^\s*$/
       const phoneReg = /^0?(13|14|15|17|18)[0-9]{9}$/
-      // if (emptyReg.test(this.info.Name)) { return alert('请输入姓名') }
-      // if (emptyReg.test(this.info.MobilePhone)) { return alert('请输入手机号') }
-      // if (!phoneReg.test(this.info.MobilePhone)) { return alert('请输入有效的手机号') }
-
+      if (emptyReg.test(this.info.name)) { return alert('请输入姓名') }
+      if (emptyReg.test(this.info.mobilePhone)) { return alert('请输入手机号') }
+      if (!phoneReg.test(this.info.mobilePhone)) { return alert('请输入有效的手机号') }
+      this.isLoading = true
       // TODO 发请求
-
-      this.$emit('start-game')
-
+      this.$axios.post('/Game/Commons/Signup', {
+        MobilePhone: this.info.mobilePhone,
+        Name: this.info.name,
+        MinigameId: this.$store.state.minigameId,
+        PlayCount: 1
+      }).then(res => {
+        console.log(res)
+        let { data } = res
+        if (data && data.Errors) {
+          this.isLoading = false
+          return alert(data.Errors)
+        }
+        this.$store.commit('registered')
+        this.$emit('start-game')
+      }).catch(err => {
+        console.log(err)
+        setTimeout(() => {
+          alert('网络请求失败')
+          this.isLoading = false
+        }, 400)
+      })
     }
   },
   created() {
-    console.log('created')
   },
   mounted() {
     setTimeout(() => this.enter = true, 500)
-    console.log('mounted')
   }
 }
 </script>
