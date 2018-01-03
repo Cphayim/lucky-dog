@@ -107,7 +107,7 @@ export default {
     editWXShare() {
       // 如果存在配置则修改
       if (typeof window.shareData === 'object' && typeof window.initShare === 'function') {
-        const lotStrArr = ['无', '有钱多金', '身体健康', '极速脱单', '桃花朵朵', '心宽体胖', '戏精附身', '光吃不胖', '少玩手机']
+        const lotStrArr = ['无', '人间人爱', '升职加薪', '身体倍棒', '甜甜蜜蜜', '财运旺旺', '好运连连', '天天开心', '超级学霸']
         const shareData = window.shareData
         shareData.title = `2018，我会#${lotStrArr[this.activeLotIndex]}#`
         shareData.content = this.$store.state.minigameTitle
